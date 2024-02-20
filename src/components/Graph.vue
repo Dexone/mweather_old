@@ -1,5 +1,8 @@
 <template>
-    <LineChart :chartData="lineData" style="width:335px; height: 290px;background-color: rgba(0, 0, 0, 0.7)" />
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+        <LineChart :chartData="lineData" />
+    </div>
 </template>
 
 <script setup>
@@ -32,7 +35,7 @@ const lineData = computed(() => ({
 
             data: y.value,
             label: 'Температура на 24 часа',
-            borderColor: 'rgb(255, 255, 255)', //цвет линии
+            borderColor: 'rgb(55, 65, 81)', //цвет линии
             borderWidth: 1, // толщина линии
             backgroundColor: 'rgba(255, 255, 255, 0.0)', //точки
         },
