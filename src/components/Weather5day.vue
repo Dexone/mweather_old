@@ -56,21 +56,23 @@
 import axios from 'axios'
 import { ref, inject, watch, onMounted } from 'vue'
 
-// const city = inject("city")
-
 defineProps({
   type: Object,
   required: true
 })
 
+
+
+
+const city = inject("city")
+
 const weatherInfo = inject("weatherInfo")
-// console.log(weatherInfo)
-// watch(city, () => {
-//   getWeather()
-// })
+watch(city, () => {
+  getWeather()
+})
 function getWeather() {
-  const cityValue = "q=Kirov"
-  // const cityValue = city.value
+
+  const cityValue = city.value
   axios.get(`https://api.openweathermap.org/data/2.5/forecast?${cityValue}&units=metric&appid=dd942f90e8c353bb0a469a7db5bbb3d4`).then((res) => {
     const weatherData = res.data.list.map((item, index) => {
 
@@ -87,10 +89,7 @@ function getWeather() {
       }
 
     })
-    console.log(weatherData)
     weatherInfo.value = weatherData; weatherData.splice(1, 7); weatherData.splice(2, 7); weatherData.splice(3, 7); weatherData.splice(4, 7); weatherData.splice(5, 6);
-
-
   })
 }
 

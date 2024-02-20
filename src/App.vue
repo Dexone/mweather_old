@@ -1,6 +1,7 @@
 <script setup>
 import Weather5day from "./components/Weather5day.vue"
 import Footer from "./components/Footer.vue"
+import Graph from "./components/Graph.vue"
 import { provide, ref } from 'vue'
 const weatherInfo = ref([])
 provide("weatherInfo", weatherInfo)
@@ -33,7 +34,7 @@ provide("city", city)
 
       <Weather5day />
 
-
+      <Graph />
 
 
 
