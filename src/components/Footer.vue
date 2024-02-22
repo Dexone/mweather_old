@@ -43,31 +43,12 @@
 
 
 
-            <!-- <div class="flex items-center justify-center">
-            <button data-tooltip-target="tooltip-new" type="button" class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none ">
-                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-                <span class="sr-only">New item</span>
-            </button>
-        </div>
-        <div id="tooltip-new" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ">
-            Create new item
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div> -->
-
-
-
-
-
-
-
 
 
             <div class="flex items-center justify-center">
                 <input type="email" id="inp" aria-describedby="helper-text-explanation"
                     class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                    placeholder="Город">
+                    placeholder="Город" value="Киров">
             </div>
             <div id="tooltip-new" role="tooltip"
                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ">
@@ -160,5 +141,6 @@ function name() {
     let inputCity = document.querySelector("#inp").value
     city.value = "q=" + inputCity
 }
+
 
 </script>

@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import axios from 'axios'
+
 import { ref, inject, watch, onMounted } from 'vue'
 
 defineProps({
@@ -67,31 +67,7 @@ defineProps({
 const city = inject("city")
 
 const weatherInfo = inject("weatherInfo")
-watch(city, () => {
-  getWeather()
-})
-function getWeather() {
 
-  const cityValue = city.value
-  axios.get(`https://api.openweathermap.org/data/2.5/forecast?${cityValue}&units=metric&appid=dd942f90e8c353bb0a469a7db5bbb3d4`).then((res) => {
-    const weatherData = res.data.list.map((item, index) => {
-
-      return {
-        dt_txt: res.data.list[index].dt_txt,
-        day: res.data.list[index].dt_txt.slice(8, -9) + "." + res.data.list[index].dt_txt.slice(5, -12),
-        pic: import.meta.env.BASE_URL + "/src/assets/min/" + res.data.list[index].weather[0].main + ".png",
-        temp: Math.round(res.data.list[index].main.temp),
-        wind: Math.round(res.data.list[index].wind.speed),
-        grnd: Math.round(res.data.list[index].main.grnd_level / 1.333),
-        visibility: (res.data.list[index].visibility) / 1000,
-        humidity: res.data.list[index].main.humidity,
-        pop: Math.round(res.data.list[index].pop * 100),
-      }
-
-    })
-    weatherInfo.value = weatherData; weatherData.splice(1, 7); weatherData.splice(2, 7); weatherData.splice(3, 7); weatherData.splice(4, 7); weatherData.splice(5, 6);
-  })
-}
 
 
 </script>
