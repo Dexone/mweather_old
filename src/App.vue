@@ -54,6 +54,12 @@
     class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 ">
     <Footer />
   </div>
+
+
+
+
+
+
 </template>
 
 
