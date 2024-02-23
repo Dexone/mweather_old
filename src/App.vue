@@ -106,7 +106,7 @@ function getWeather() {
       return {
         dt_txt: res.data.list[index].dt_txt,
         day: res.data.list[index].dt_txt.slice(8, -9) + "." + res.data.list[index].dt_txt.slice(5, -12),
-        pic: import.meta.env.BASE_URL + "/src/assets/min/" + res.data.list[index].weather[0].main + ".png",
+        pic: import.meta.env.BASE_URL + "/min/" + res.data.list[index].weather[0].main + ".png",
         temp: Math.round(res.data.list[index].main.temp),
         wind: Math.round(res.data.list[index].wind.speed),
         grnd: Math.round(res.data.list[index].main.grnd_level / 1.333),
