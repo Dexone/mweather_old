@@ -9,7 +9,7 @@
 import axios from 'axios'
 import Chart from 'chart.js/auto';
 import { LineChart } from "vue-chart-3"
-import { ref, computed, inject, watch, onMounted } from 'vue'
+import { computed, inject} from 'vue'
 const city = inject("city")
 defineProps({
     type: Object,

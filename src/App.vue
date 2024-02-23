@@ -22,8 +22,7 @@
         <Weather5day />
       </div>
 
-      <div
-        class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 inline-block mr-2 mb-2">
+      <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 inline-block mr-2 mb-2">
         <Details />
       </div>
 
@@ -34,6 +33,20 @@
       <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow inline-block">
         <Graph />
       </div>
+
+
+
+
+
+
+      <div id="dropdownInformation"
+        class=" bg-white divide-y divide-gray-100 rounded-lg shadow w-44 inline-block">
+        <Favourite />
+      </div>
+
+
+
+
 
 
 
@@ -54,17 +67,12 @@
     class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 ">
     <Footer />
   </div>
-
-
-
-
-
-
 </template>
 
 
 <script setup>
 import Weather5day from "./components/Weather5day.vue"
+import Favourite from "./components/Favourite.vue"
 import Footer from "./components/Footer.vue"
 import Graph from "./components/Graph.vue"
 import Details from "./components/Details.vue"
@@ -96,9 +104,8 @@ provide("graphInfo", graphInfo)
 let nx = ref(0)
 provide("nx", nx)
 
-// watch(nx, () => {
-//   getWeather()
-// })
+const favouriteCity = ref([])
+provide("favouriteCity", favouriteCity)
 
 
 function getWeather() {
