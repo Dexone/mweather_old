@@ -18,18 +18,18 @@
 
       <!-- grid mb-8 border border-gray-200 rounded-lg shadow-sm  md:mb-12 md:grid-cols-2 bg-white max-w-xs inline-block -->
 
-
+      <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8  inline-block mr-2 mb-2">
+        <Weather5day />
+      </div>
 
       <div
-        class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 inline-block">
+        class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 inline-block mr-2 mb-2">
         <Details />
       </div>
 
 
 
-      <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8  inline-block">
-        <Weather5day />
-      </div>
+
 
       <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow inline-block">
         <Graph />
