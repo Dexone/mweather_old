@@ -1,75 +1,84 @@
 <template>
-    <div class="grid mb-8 border border-gray-200 rounded-lg shadow-sm  md:mb-12 md:grid-cols-2 bg-white max-w-xl">
-        <figure
-            class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e ">
-            <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 ">
-                <h3 class="text-lg font-semibold text-gray-900 ">Погода на сегодня</h3>
-                <p class="my-4">тут что-то будет</p>
-            </blockquote>
-            <figcaption class="flex items-center justify-center ">
-                <img class="rounded-full w-9 h-9" v-bind:src="weatherInfo[0].pic" alt="profile picture">
-                <div class="space-y-0.5 font-medium  text-left rtl:text-right ms-3">
-                    {{ weatherInfo[0].temp }}
-                    <div class="text-sm text-gray-500  "> Ощущается как {{ weatherInfo[0].feels_like }}</div>
-                </div>
-            </figcaption>
-        </figure>
+    <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl ">
+        Подробный прогноз в {{ weatherInfo[nx].city }}
+    </h5>
+    <p class="text-sm font-normal text-gray-500 ">Connect with one of our available wallet providers
+        or create a new one.</p>
+    <ul class="my-4 space-y-3">
 
 
-        <figure
-            class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 md:rounded-se-lg ">
-            <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 ">
-                <h3 class="text-lg font-semibold text-gray-900 ">Ветер</h3>
-                <p class="my-4">Возможны порывы до {{ weatherInfo[0].gust }} м/с</p>
-            </blockquote>
-            <figcaption class="flex items-center justify-center ">
-                <img :style="{ transform: 'rotate(' + weatherInfo[0].deg + 'deg)' }" class="rounded-full w-9 h-9"
+        <li>
+            <a href="#"
+                class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
+
+                <img class="rounded-full w-6 h-6" v-bind:src="weatherInfo[nx].pic" alt="profile picture">
+
+                <span class="flex-1 ms-3 whitespace-nowrap">Облачно</span>
+                <span
+                    class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Вероятность
+                    осадков {{ weatherInfo[nx].pop }}%</span>
+            </a>
+        </li>
+
+
+
+
+        <li>
+            <a href="#"
+                class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
+                <img class="rounded-full w-6 h-6" src="../assets/temp.png" alt="profile picture">
+
+                <span class="flex-1 ms-3 whitespace-nowrap">{{ weatherInfo[nx].temp }}</span>
+                <span
+                    class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Ощущается
+                    как {{ weatherInfo[nx].feels_like }}</span>
+            </a>
+        </li>
+
+
+
+
+
+        <li>
+            <a href="#"
+                class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
+                <img :style="{ transform: 'rotate(' + weatherInfo[nx].deg + 'deg)' }" class="rounded-full w-6 h-6"
                     src="../assets/arrow.png" alt="profile picture">
-                <div class="space-y-0.5 font-medium  text-left rtl:text-right ms-3">
-                    <div v-if="weatherInfo[0].deg > 0">Южный</div>
-                    <div class="text-sm text-gray-500 ">{{ weatherInfo[0].wind }} м/с</div>
-                </div>
-            </figcaption>
-        </figure>
+                <span class="flex-1 ms-3 whitespace-nowrap">
+                    <a v-if="weatherInfo[nx].deg > 0">Южный</a> {{ weatherInfo[nx].wind }} м/с
+                </span>
+                <span
+                    class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Порывы
+                    до {{ weatherInfo[nx].gust }} м/с</span>
+            </a>
+        </li>
 
 
-        <figure
-            class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 md:rounded-es-lg md:border-b-0 md:border-e ">
-            <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 ">
-                <h3 class="text-lg font-semibold text-gray-900 ">Mindblowing workflow</h3>
-                <p class="my-4">Aesthetically, the well designed components are beautiful and will undoubtedly level up your
-                    next application."</p>
-            </blockquote>
-            <figcaption class="flex items-center justify-center ">
-                <img class="rounded-full w-9 h-9"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="profile picture">
-                <div class="space-y-0.5 font-medium  text-left rtl:text-right ms-3">
-                    <div>Jese Leos</div>
-                    <div class="text-sm text-gray-500 ">Software Engineer at Facebook</div>
-                </div>
-            </figcaption>
-        </figure>
 
 
-        <figure
-            class="flex flex-col items-center justify-center p-8 text-center bg-white border-gray-200 rounded-b-lg md:rounded-se-lg ">
-            <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 ">
-                <h3 class="text-lg font-semibold text-gray-900 ">Efficient Collaborating</h3>
-                <p class="my-4">You have many examples that can be used to create a fast prototype for your team."</p>
-            </blockquote>
-            <figcaption class="flex items-center justify-center ">
-                <img class="rounded-full w-9 h-9"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
-                    alt="profile picture">
-                <div class="space-y-0.5 font-medium  text-left rtl:text-right ms-3">
-                    <div>Joseph McFall</div>
-                    <div class="text-sm text-gray-500 ">CTO at Google</div>
-                </div>
-            </figcaption>
-        </figure>
+        <li>
+            <a href="#"
+                class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
+                <img class="rounded-full w-6 h-6" src="../assets/humidity.png" alt="profile picture">
+
+                <span class="flex-1 ms-3 whitespace-nowrap">Влажность {{ weatherInfo[nx].humidity }}%</span>
+                <span
+                    class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Давление
+                    {{ weatherInfo[nx].grnd }}мм рт.ст.</span>
+            </a>
+        </li>
+
+
+
+    </ul>
+    <div>
+        <a href="#" class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline ">
+            <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Why do I need to connect with my wallet?</a>
     </div>
-
-    <button @click="console.log(weatherInfo)">test1</button>
 </template>
   
 <script setup>
@@ -82,6 +91,7 @@ import { ref, inject, watch, onMounted } from 'vue'
 
 const city = inject("city")
 const weatherInfo = inject("weatherInfo")
+const nx = inject("nx")
 
 
 defineProps({
@@ -91,5 +101,5 @@ defineProps({
 
 
 
-// onMounted(() => getWeather())
+
 </script>

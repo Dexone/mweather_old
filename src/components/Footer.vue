@@ -1,6 +1,5 @@
 <template>
-    <div
-        class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 ">
+
         <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
             <button data-tooltip-target="tooltip-home" type="button"
                 class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-50 ">
@@ -18,7 +17,7 @@
             </div>
             <button @click=latlong data-tooltip-target="tooltip-wallet" type="button"
                 class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 ">
-                <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                <svg class="w-6 h-6 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd"
                         d="M12 2a8 8 0 0 1 6.6 12.6l-.1.1-.6.7-5.1 6.2a1 1 0 0 1-1.6 0L6 15.3l-.3-.4-.2-.2v-.2A8 8 0 0 1 11.8 2Zm3 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
@@ -48,7 +47,7 @@
             <div class="flex items-center justify-center">
                 <input type="email" id="inp" aria-describedby="helper-text-explanation"
                     class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                    placeholder="Город" value="Киров">
+                    placeholder="Город">
             </div>
             <div id="tooltip-new" role="tooltip"
                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ">
@@ -80,7 +79,7 @@
 
             <button @click="name" data-tooltip-target="tooltip-settings" type="button"
                 class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 ">
-                <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                <svg class="w-6 h-6 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                         d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -115,7 +114,7 @@
                 <div class="tooltip-arrow" data-popper-arrow></div>
             </div>
         </div>
-    </div>
+
 </template>
 
 

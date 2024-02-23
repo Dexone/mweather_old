@@ -1,7 +1,6 @@
 
 
 <template>
-  <button @click="console.log(weatherInfo)">test</button>
   <main class="bg-white rounded-lg shadow max-w-screen-xl mx-auto">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
       <div class="sm:flex sm:items-center sm:justify-between">
@@ -17,15 +16,24 @@
       </div>
 
 
-
-
-      <Details />
+      <!-- grid mb-8 border border-gray-200 rounded-lg shadow-sm  md:mb-12 md:grid-cols-2 bg-white max-w-xs inline-block -->
 
 
 
-      <Weather5day />
+      <div
+        class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 inline-block">
+        <Details />
+      </div>
 
-      <Graph />
+
+
+      <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8  inline-block">
+        <Weather5day />
+      </div>
+
+      <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow inline-block">
+        <Graph />
+      </div>
 
 
 
@@ -33,15 +41,19 @@
       <span class="block text-sm text-gray-500 sm:text-center ">© 2024 <a href="https://github.com/Dexone"
           class="hover:underline">Dexone</a>. All Rights Reserved.</span>
     </div>
+
+
+
+
+
+
+
   </main>
 
-
-
-
-
-
-
-  <Footer />
+  <div
+    class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 ">
+    <Footer />
+  </div>
 </template>
 
 
@@ -51,10 +63,10 @@ import Footer from "./components/Footer.vue"
 import Graph from "./components/Graph.vue"
 import Details from "./components/Details.vue"
 import axios from 'axios'
-import { provide, ref, watch } from 'vue'
+import { provide, ref, watch, onMounted } from 'vue'
 
 
-const city = ref("")
+const city = ref("q=Москва")
 provide("city", city)
 
 // let nx = 0
@@ -66,11 +78,23 @@ provide("city", city)
 watch(city, () => {
   getWeather()
 })
-const weatherInfo = ref([{ dt_txt: "loading", day: "loading", pic: "loading", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0" }])
+
+
+const weatherInfo = ref([{ dt_txt: "loading", day: "loading", pic: "loading", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0", city: "0" }])
 provide("weatherInfo", weatherInfo)
 
 let graphInfo = ref([])
 provide("graphInfo", graphInfo)
+
+
+let nx = ref(0)
+provide("nx", nx)
+
+// watch(nx, () => {
+//   getWeather()
+// })
+
+
 function getWeather() {
   const cityValue = city.value
   axios.get(`https://api.openweathermap.org/data/2.5/forecast?${cityValue}&units=metric&appid=dd942f90e8c353bb0a469a7db5bbb3d4`).then((res) => {
@@ -91,10 +115,14 @@ function getWeather() {
         pop: Math.round(res.data.list[index].pop * 100),
         deg: res.data.list[index].wind.deg,
         feels_like: Math.round(res.data.list[index].main.feels_like),
-        gust: Math.round(res.data.list[index].wind.gust)
+        gust: Math.round(res.data.list[index].wind.gust),
+        city: res.data.city.name
       }
     })
     weatherInfo.value = weatherData; weatherData.splice(1, 7); weatherData.splice(2, 7); weatherData.splice(3, 7); weatherData.splice(4, 7); weatherData.splice(5, 6);
   })
 }
+
+
+getWeather()
 </script>
