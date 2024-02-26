@@ -2,7 +2,7 @@
   <div class="flex items-center justify-between mb-4 ">
     <h5 class="text-xl font-bold leading-none text-gray-900">Прогноз на 5 дней</h5>
     <a href="#" class="text-sm font-medium text-blue-600 hover:underline">
-      View all
+      {{ weatherInfo[nx].city }}
     </a>
   </div>
   <div class="flow-root">

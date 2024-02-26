@@ -14,6 +14,13 @@
             Home
             <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
+
+
+
+
+
+
+
         <button @click=latlong data-tooltip-target="tooltip-wallet" type="button"
             class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 ">
             <svg class="w-6 h-6 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -44,7 +51,7 @@
 
 
         <div class="flex items-center justify-center">
-            <input type="email" id="inp" aria-describedby="helper-text-explanation"
+            <input @input="name" type="email" id="inp" aria-describedby="helper-text-explanation"
                 class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 placeholder="Город">
         </div>
@@ -96,18 +103,40 @@
 
 
 
-
-        <button @click="favouriteCity.push(weatherInfo[0].city), console.log(favouriteCity)"
+        <button v-if="syncCity" @click=" favouriteCity.splice(favouriteCity.indexOf(weatherInfo[0].city), 1)"
             data-tooltip-target="tooltip-profile" type="button"
+            class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
+
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="m12.7 20.7 6.2-7.1c2.7-3 2.6-6.5.8-8.7A5 5 0 0 0 16 3c-1.3 0-2.7.4-4 1.4A6.3 6.3 0 0 0 8 3a5 5 0 0 0-3.7 1.9c-1.8 2.2-2 5.8.8 8.7l6.2 7a1 1 0 0 0 1.4 0Z" />
+            </svg>
+            <span class="sr-only">Избранное</span>
+        </button>
+
+
+
+        <button v-else @click="favouriteCity.push(weatherInfo[0].city)" data-tooltip-target="tooltip-profile" type="button"
             class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
             </svg>
-
             <span class="sr-only">Избранное</span>
         </button>
+
+
+
+
+
+
+
+
+
+
+
         <div id="tooltip-profile" role="tooltip"
             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ">
             Избранное
@@ -118,7 +147,7 @@
 
 
 <script setup>
-import { inject } from 'vue'
+import { inject, watch, ref } from 'vue'
 
 defineProps({
     type: Object,
@@ -127,6 +156,9 @@ defineProps({
 const weatherInfo = inject("weatherInfo")
 const city = inject("city")
 const favouriteCity = inject("favouriteCity")
+// let syncCity = inject("syncCity")
+let syncCity = ref()
+
 
 function latlong() {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -142,8 +174,18 @@ function name() {
 }
 
 
-function searchCity() {
-//тут остановился
+function syncCityFunction() {
+    syncCity.value = (favouriteCity.value.includes(weatherInfo.value[0].city))
+    console.log(syncCity.value)
 }
+
+watch(weatherInfo, () => {
+    syncCityFunction()
+})
+watch(favouriteCity.value, () => {
+    syncCityFunction()
+})
+
+
 
 </script>

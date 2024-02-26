@@ -1,14 +1,18 @@
 
 
 <template>
-  <main class="bg-white rounded-lg shadow max-w-screen-xl mx-auto">
+  <!-- max-w-screen-xl -->
+  <main class="bg-white rounded-lg shadow max-w-4xl mx-auto">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-      <div class="sm:flex sm:items-center sm:justify-between">
+
+
+
+      <div class="sm:flex sm:items-center sm:justify-between mb-3">
         <a href="https://dexone.github.io/mweather/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+          <img src="../public/logo.png" class="h-8" alt="Flowbite Logo" />
           <span class="self-center text-2xl font-semibold whitespace-nowrap">mweather</span>
         </a>
-        <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0">
+        <ul class="flex flex-wrap items-center  text-sm font-medium text-gray-500 sm:mb-0">
           <li>
             <a href="#" class="hover:underline me-4 md:me-6">About</a>
           </li>
@@ -18,11 +22,11 @@
 
       <!-- grid mb-8 border border-gray-200 rounded-lg shadow-sm  md:mb-12 md:grid-cols-2 bg-white max-w-xs inline-block -->
 
-      <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8  inline-block mr-2 mb-2">
+      <div class=" max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8  mb-3 mx-auto">
         <Weather5day />
       </div>
 
-      <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 inline-block mr-2 mb-2">
+      <div class="max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6   mb-3 mx-auto">
         <Details />
       </div>
 
@@ -30,7 +34,7 @@
 
 
 
-      <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow inline-block">
+      <div class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow mb-3 mx-auto">
         <Graph />
       </div>
 
@@ -39,8 +43,7 @@
 
 
 
-      <div id="dropdownInformation"
-        class=" bg-white divide-y divide-gray-100 rounded-lg shadow w-44 inline-block">
+      <div class="max-w-4xl bg-white divide-y divide-gray-100 rounded-lg shadow  mx-auto ">
         <Favourite />
       </div>
 
@@ -103,6 +106,10 @@ provide("graphInfo", graphInfo)
 
 let nx = ref(0)
 provide("nx", nx)
+
+// let syncCity = ref()
+// provide("syncCity", syncCity)
+
 
 const favouriteCity = ref([])
 provide("favouriteCity", favouriteCity)

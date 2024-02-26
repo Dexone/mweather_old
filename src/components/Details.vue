@@ -1,8 +1,8 @@
 <template>
     <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl ">
-        Подробный прогноз в {{ weatherInfo[nx].city }}
+        Подробный прогноз
     </h5>
-    <p class="text-sm font-normal text-gray-500 ">тут инфо будет</p>
+    <p class="text-sm font-normal text-gray-500 ">{{ weatherInfo[nx].city }}</p>
     <ul class="my-4 space-y-3">
 
 

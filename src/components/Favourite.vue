@@ -4,7 +4,8 @@
     </div>
     <ul class="py-2 text-sm text-gray-700 ">
         <li v-for="favourite, index in favouriteCity">
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">{{ favourite }} </a>
+            <a @click="city = 'q=' + favourite" class="block px-4 py-2 hover:bg-gray-100 ">{{ favourite
+            }} </a>
             <!-- <button @click="favouriteCity.splice(index, 1)">delete</button> -->
         </li>
 
@@ -23,6 +24,6 @@ defineProps({
 })
 
 
-
+const city = inject("city")
 const favouriteCity = inject("favouriteCity")
 </script>
