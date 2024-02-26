@@ -1,7 +1,5 @@
-# Vue 3 + Vite
+# About the app
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This application is developed by Dexone and includes the functions of displaying a 5-day weather forecast, a detailed forecast for a selected day and a 24-hour temperature graph. It is possible to add a city to favorites with saving when the page is reloaded, specify the location by geolocation or enter the name of the city in the search bar.
 
-## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
