@@ -41,9 +41,10 @@
         <li>
             <a href="#"
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
-                <img :style="{ transform: 'rotate(' + weatherInfo[nx].deg + 'deg)' }" class="rounded-full w-6 h-6"
+                <img :style="{ transform: 'rotate(' + weatherInfo[nx].deg + 'deg)' }"
+                    class="rounded-full w-6 h-6"
                     src="../assets/arrow.png" alt="profile picture">
-                <span class="flex-1 ms-3 whitespace-nowrap">
+                <span class="flex-1 ms-3 whitespace-nowrap ">
                     <a v-if="weatherInfo[nx].deg > 0">Южный</a> {{ weatherInfo[nx].wind }} м/с
                 </span>
                 <span
@@ -81,8 +82,8 @@
 </template>
   
 <script setup>
-import axios from 'axios'
-import { ref, inject, watch, onMounted } from 'vue'
+
+import { inject } from 'vue'
 
 
 

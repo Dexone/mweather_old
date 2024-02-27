@@ -43,8 +43,8 @@
             <img src="../public/logo.png" class="h-8" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap">mweather</span>
           </a>
-          <div  class="flex items-center space-x-6 rtl:space-x-reverse">
-            <a href="#" @click="showModal = !showModal"  class="text-sm  text-gray-500  hover:underline">О
+          <div class="flex items-center space-x-6 rtl:space-x-reverse">
+            <a href="#" @click="showModal = !showModal" class="text-sm  text-gray-500  hover:underline">О
               приложении</a>
           </div>
         </div>
@@ -111,14 +111,9 @@
 
 
 
-
-
       <div class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow mb-3 mx-auto">
         <Graph />
       </div>
-
-
-
 
 
 
@@ -129,17 +124,10 @@
 
 
 
-
-
-
       <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
       <span class="block text-sm text-gray-500 sm:text-center ">© 2024 <a href="https://github.com/Dexone"
           class="hover:underline">Dexone</a>. All Rights Reserved.</span>
     </div>
-
-
-
-
 
 
 
@@ -165,8 +153,7 @@ import { provide, ref, watch, onMounted } from 'vue'
 const city = ref("q=Москва")
 provide("city", city)
 
-// let nx = 0
-// provide("nx", nx)
+
 
 
 
@@ -191,8 +178,13 @@ provide("nx", nx)
 // let syncCity = ref()
 // provide("syncCity", syncCity)
 
+const inputCity = ref('')
+provide("inputCity", inputCity)
 
-const favouriteCity = ref([])
+
+
+
+const favouriteCity = ref(["Киров", "Москва", "Пермь", "Екатеринбург", "Казань"])
 provide("favouriteCity", favouriteCity)
 
 

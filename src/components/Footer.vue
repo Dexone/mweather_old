@@ -7,8 +7,8 @@
                 <path
                     d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
             </svg> -->
-            <svg class="w-[30px] h-[30px] text-gray-500" aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <svg class="w-[30px] h-[30px] text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 6v13m0-13 4 4m-4-4-4 4" />
             </svg>
@@ -19,9 +19,6 @@
             Home
             <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
-
-
-
 
 
 
@@ -50,16 +47,11 @@
 
 
 
-
-
-
-
-
         <div class="flex items-center justify-center">
-            <input @input="name" type="email" id="inp" aria-describedby="helper-text-explanation"
+            <input @input="city = 'q=' + inputCity, syncCity = (favouriteCity.includes(inputCity))" v-model="inputCity"
+                type="email" id="inp" aria-describedby="helper-text-explanation" 
                 class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 placeholder="Город">
-            <!-- w-full -->
         </div>
         <div id="tooltip-new" role="tooltip"
             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ">
@@ -109,7 +101,7 @@
 
 
 
-        <button v-if="syncCity" @click=" favouriteCity.splice(favouriteCity.indexOf(weatherInfo[0].city), 1)"
+        <button v-if="syncCity" @click="favouriteCity.splice(favouriteCity.indexOf(inputCity), 1)"
             data-tooltip-target="tooltip-profile" type="button"
             class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50  group">
 
@@ -123,8 +115,8 @@
 
 
 
-        <button v-else @click="favouriteCity.push(weatherInfo[0].city)" data-tooltip-target="tooltip-profile" type="button"
-            class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
+        <button v-else @click="favouriteCity.push(inputCity)" data-tooltip-target="tooltip-profile" type="button"
+            class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 group">
             <svg class="w-6 h-6 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -153,7 +145,7 @@
 
 
 <script setup>
-import { inject, watch, ref } from 'vue'
+import { inject, watch, ref, watchEffect } from 'vue'
 
 defineProps({
     type: Object,
@@ -162,8 +154,9 @@ defineProps({
 const weatherInfo = inject("weatherInfo")
 const city = inject("city")
 const favouriteCity = inject("favouriteCity")
-// let syncCity = inject("syncCity")
+
 let syncCity = ref()
+const inputCity = inject("inputCity")
 
 
 function latlong() {
@@ -174,25 +167,16 @@ function latlong() {
     });
 }
 
-function name() {
-    let inputCity = document.querySelector("#inp").value
-    city.value = "q=" + inputCity
-}
-
-
-function syncCityFunction() {
-    syncCity.value = (favouriteCity.value.includes(weatherInfo.value[0].city))
-    console.log(syncCity.value)
-}
-
-watch(weatherInfo, () => {
-    syncCityFunction()
-})
-watch(favouriteCity.value, () => {
-    syncCityFunction()
+watchEffect(() => {
+    inputCity
+    favouriteCity
+    syncCity.value = (favouriteCity.value.includes(inputCity.value))
 })
 
 
+// watch(inputCity, () => {
+//     syncCity.value = (favouriteCity.value.includes(inputCity.value))
+// })
 
 
 function topFunction() {

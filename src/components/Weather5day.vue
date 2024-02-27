@@ -19,15 +19,17 @@
           </div>
           <div class="flex-1 min-w-0 ms-4">
             <p class="text-sm font-medium text-gray-900 truncate">
-              {{ weather.day }}
+              {{ dataArray.date[index] }}
             </p>
-            <p @click="nx = index, console.log(nx)" class="text-sm text-gray-500 truncate">
-              Подробнее
+            <p class="text-sm text-gray-500 truncate">
+              {{ dataArray.week[index] }}
             </p>
           </div>
           <div class="inline-flex items-center text-base font-semibold text-gray-900">
             {{ weather.temp }}°C
           </div>
+          <button @click="nx = index, console.log(nx)"
+            class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded">Подробнее</button>
         </div>
       </li>
     </ul>
@@ -36,7 +38,7 @@
 
 <script setup>
 
-import { ref, inject, watch, onMounted } from 'vue'
+import { inject } from 'vue'
 
 defineProps({
   type: Object,
@@ -44,12 +46,35 @@ defineProps({
 })
 
 
+
+
 let nx = inject("nx")
 
-const city = inject("city")
 
 const weatherInfo = inject("weatherInfo")
 
 
+
+
+
+
+
+
+
+
+
+let dataArray = { week: [], date: [] }
+let count = 1
+let indexMonth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+let indexNed = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота']
+for (let i = 0; i < 6; i++) {
+  let d = new Date(new Date().getTime() + count * 60 * 60 * 1000);
+  let Month = d.getMonth();
+  let Ned = d.getDay();
+  let Day = d.getDate();
+  dataArray.week.push(indexNed[Ned])
+  dataArray.date.push(Day + " " + indexMonth[Month])
+  count = count + 24
+}
 
 </script>
