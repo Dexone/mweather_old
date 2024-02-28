@@ -7,42 +7,14 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <nav class="bg-white border-gray-200 ">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl  pb-5">
           <a href="https://dexone.github.io/mweather/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="../public/logo.png" class="h-8" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap">mweather</span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap underline underline-offset-3 decoration-4 decoration-blue-400">mweather</span>
           </a>
+
+
           <div class="flex items-center space-x-6 rtl:space-x-reverse">
             <a href="#" @click="showModal = !showModal" class="text-sm  text-gray-500  hover:underline">О
               приложении</a>
@@ -190,7 +162,7 @@ watchEffect(() => {
   city
   selectedCity.value.nx
   getWeather()
-}) 
+})
 
 function getWeather() {
   const cityValue = city.value
