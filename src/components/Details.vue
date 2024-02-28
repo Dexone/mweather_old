@@ -1,8 +1,9 @@
 <template>
     <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl ">
-        Подробный прогноз
+        Подробный прогноз на {{ selectedCity.date[selectedCity.nx] }}
     </h5>
-    <p class="text-sm font-normal text-gray-500 ">{{ weatherInfo[nx].city }}</p>
+    <p class="text-sm font-normal text-gray-500 ">{{ selectedCity.week[selectedCity.nx] }}</p>
+    
     <ul class="my-4 space-y-3">
 
 
@@ -10,12 +11,12 @@
             <a href="#"
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
 
-                <img class="rounded-full w-6 h-6" v-bind:src="weatherInfo[nx].pic" alt="profile picture">
+                <img class="rounded-full w-6 h-6" v-bind:src="weatherInfo[selectedCity.nx].pic" alt="profile picture">
 
                 <span class="flex-1 ms-3 whitespace-nowrap">Облачно</span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Вероятность
-                    осадков {{ weatherInfo[nx].pop }}%</span>
+                    осадков {{ weatherInfo[selectedCity.nx].pop }}%</span>
             </a>
         </li>
 
@@ -27,10 +28,10 @@
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
                 <img class="rounded-full w-6 h-6" src="../assets/temp.png" alt="profile picture">
 
-                <span class="flex-1 ms-3 whitespace-nowrap">{{ weatherInfo[nx].temp }}</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">{{ weatherInfo[selectedCity.nx].temp }}</span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Ощущается
-                    как {{ weatherInfo[nx].feels_like }}</span>
+                    как {{ weatherInfo[selectedCity.nx].feels_like }}</span>
             </a>
         </li>
 
@@ -41,15 +42,14 @@
         <li>
             <a href="#"
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
-                <img :style="{ transform: 'rotate(' + weatherInfo[nx].deg + 'deg)' }"
-                    class="rounded-full w-6 h-6"
-                    src="../assets/arrow.png" alt="profile picture">
+                <img :style="{ transform: 'rotate(' + weatherInfo[selectedCity.nx].deg + 'deg)' }"
+                    class="rounded-full w-6 h-6" src="../assets/arrow.png" alt="profile picture">
                 <span class="flex-1 ms-3 whitespace-nowrap ">
-                    <a v-if="weatherInfo[nx].deg > 0">Южный</a> {{ weatherInfo[nx].wind }} м/с
+                    <a v-if="weatherInfo[selectedCity.nx].deg > 0">Южный</a> {{ weatherInfo[selectedCity.nx].wind }} м/с
                 </span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Порывы
-                    до {{ weatherInfo[nx].gust }} м/с</span>
+                    до {{ weatherInfo[selectedCity.nx].gust }} м/с</span>
             </a>
         </li>
 
@@ -61,10 +61,10 @@
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
                 <img class="rounded-full w-6 h-6" src="../assets/humidity.png" alt="profile picture">
 
-                <span class="flex-1 ms-3 whitespace-nowrap">Влажность {{ weatherInfo[nx].humidity }}%</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Влажность {{ weatherInfo[selectedCity.nx].humidity }}%</span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Давление
-                    {{ weatherInfo[nx].grnd }}мм рт.ст.</span>
+                    {{ weatherInfo[selectedCity.nx].grnd }}мм рт.ст.</span>
             </a>
         </li>
 
@@ -91,7 +91,7 @@ import { inject } from 'vue'
 
 const city = inject("city")
 const weatherInfo = inject("weatherInfo")
-const nx = inject("nx")
+const selectedCity = inject("selectedCity")
 
 
 defineProps({

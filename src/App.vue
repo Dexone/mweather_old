@@ -137,6 +137,8 @@
     class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 ">
     <Footer />
   </div>
+
+
 </template>
 
 
@@ -160,6 +162,9 @@ provide("city", city)
 const showModal = ref(true)
 
 
+
+
+
 watch(city, () => {
   getWeather()
 })
@@ -172,16 +177,14 @@ let graphInfo = ref([])
 provide("graphInfo", graphInfo)
 
 
-let nx = ref(0)
-provide("nx", nx)
 
-// let syncCity = ref()
-// provide("syncCity", syncCity)
+
 
 const inputCity = ref('')
 provide("inputCity", inputCity)
 
-
+let selectedCity = ref({ week: [], date: [], nx: 0 })
+provide("selectedCity", selectedCity)
 
 
 const favouriteCity = ref(["Киров", "Москва", "Пермь", "Екатеринбург", "Казань"])
@@ -193,8 +196,7 @@ function getWeather() {
   axios.get(`https://api.openweathermap.org/data/2.5/forecast?${cityValue}&units=metric&appid=dd942f90e8c353bb0a469a7db5bbb3d4`).then((res) => {
     graphInfo.value.x = ["Now", res.data.list[1].dt_txt.slice(11, -6), res.data.list[2].dt_txt.slice(11, -6), res.data.list[3].dt_txt.slice(11, -6), res.data.list[4].dt_txt.slice(11, -6), res.data.list[5].dt_txt.slice(11, -6), res.data.list[6].dt_txt.slice(11, -6), res.data.list[7].dt_txt.slice(11, -6), res.data.list[8].dt_txt.slice(11, -6)]
     graphInfo.value.y = [res.data.list[0].main.temp, res.data.list[1].main.temp, res.data.list[2].main.temp, res.data.list[3].main.temp, res.data.list[4].main.temp, res.data.list[5].main.temp, res.data.list[6].main.temp, res.data.list[7].main.temp, res.data.list[8].main.temp]
-    console.log(res.data)
-    console.log(weatherInfo)
+
     const weatherData = res.data.list.map((item, index) => {
       return {
         dt_txt: res.data.list[index].dt_txt,

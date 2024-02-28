@@ -174,9 +174,7 @@ watchEffect(() => {
 })
 
 
-// watch(inputCity, () => {
-//     syncCity.value = (favouriteCity.value.includes(inputCity.value))
-// })
+
 
 
 function topFunction() {
