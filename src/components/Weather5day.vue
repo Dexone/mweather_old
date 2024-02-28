@@ -52,7 +52,8 @@ let selectedCity = inject("selectedCity")
 const weatherInfo = inject("weatherInfo")
 
 function scroll() {
-  window.scrollBy(0, 400)
+  // window.scrollBy(0, 400)
+  window.scrollTo(0,530)
 }
 
 
