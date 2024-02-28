@@ -1,15 +1,12 @@
 <template>
-
-
-        <LineChart :chartData="lineData" />
-
+    <LineChart :chartData="lineData" />
 </template>
 
 <script setup>
 import axios from 'axios'
 import Chart from 'chart.js/auto';
 import { LineChart } from "vue-chart-3"
-import { computed, inject} from 'vue'
+import { computed, inject } from 'vue'
 const city = inject("city")
 defineProps({
     type: Object,
@@ -19,7 +16,7 @@ defineProps({
 
 
 const graphInfo = inject("graphInfo")
-
+const selectedCity = inject("selectedCity")
 
 
 const lineData = computed(() => ({
@@ -28,7 +25,7 @@ const lineData = computed(() => ({
     datasets: [
         {
             data: graphInfo.value.y,
-            label: 'Температура на 24 часа',
+            label: 'График температуры на ' + selectedCity.value.date[selectedCity.value.nx],
             borderColor: 'rgb(55, 65, 81)', //цвет линии
             borderWidth: 1, // толщина линии
             backgroundColor: 'rgba(255, 255, 255, 0.0)', //точки

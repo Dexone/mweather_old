@@ -137,8 +137,6 @@
     class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 ">
     <Footer />
   </div>
-
-
 </template>
 
 
@@ -149,7 +147,7 @@ import Footer from "./components/Footer.vue"
 import Graph from "./components/Graph.vue"
 import Details from "./components/Details.vue"
 import axios from 'axios'
-import { provide, ref, watch, onMounted } from 'vue'
+import { provide, ref, watch, onMounted, watchEffect } from 'vue'
 
 
 const city = ref("q=Москва")
@@ -165,9 +163,7 @@ const showModal = ref(true)
 
 
 
-watch(city, () => {
-  getWeather()
-})
+
 
 
 const weatherInfo = ref([{ dt_txt: "loading", day: "loading", pic: "loading", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0", city: "0" }])
@@ -190,13 +186,18 @@ provide("selectedCity", selectedCity)
 const favouriteCity = ref(["Киров", "Москва", "Пермь", "Екатеринбург", "Казань"])
 provide("favouriteCity", favouriteCity)
 
+watchEffect(() => {
+  city
+  selectedCity.value.nx
+  getWeather()
+}) 
 
 function getWeather() {
   const cityValue = city.value
   axios.get(`https://api.openweathermap.org/data/2.5/forecast?${cityValue}&units=metric&appid=dd942f90e8c353bb0a469a7db5bbb3d4`).then((res) => {
-    graphInfo.value.x = ["Now", res.data.list[1].dt_txt.slice(11, -6), res.data.list[2].dt_txt.slice(11, -6), res.data.list[3].dt_txt.slice(11, -6), res.data.list[4].dt_txt.slice(11, -6), res.data.list[5].dt_txt.slice(11, -6), res.data.list[6].dt_txt.slice(11, -6), res.data.list[7].dt_txt.slice(11, -6), res.data.list[8].dt_txt.slice(11, -6)]
-    graphInfo.value.y = [res.data.list[0].main.temp, res.data.list[1].main.temp, res.data.list[2].main.temp, res.data.list[3].main.temp, res.data.list[4].main.temp, res.data.list[5].main.temp, res.data.list[6].main.temp, res.data.list[7].main.temp, res.data.list[8].main.temp]
-
+    graphInfo.value.x = [res.data.list[selectedCity.value.nx].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 1].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 2].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 3].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 4].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 5].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 6].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 7].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 8].dt_txt.slice(11, -6)]
+    graphInfo.value.y = [res.data.list[selectedCity.value.nx].main.temp, res.data.list[selectedCity.value.nx + 1].main.temp, res.data.list[selectedCity.value.nx + 2].main.temp, res.data.list[selectedCity.value.nx + 3].main.temp, res.data.list[selectedCity.value.nx + 4].main.temp, res.data.list[selectedCity.value.nx + 5].main.temp, res.data.list[selectedCity.value.nx + 6].main.temp, res.data.list[selectedCity.value.nx + 7].main.temp, res.data.list[selectedCity.value.nx + 8].main.temp]
+    console.log(res.data.list[selectedCity.value.nx].dt_txt.slice(11, -6))
     const weatherData = res.data.list.map((item, index) => {
       return {
         dt_txt: res.data.list[index].dt_txt,
