@@ -61,16 +61,40 @@ const indexInfo = [0, 8, 16, 24, 32, 39]
 
 
 
+// watch(weatherInfo, () => {
+//   for (let i = 0; i < 6; i++)
+//   sortInfo.value[i] = weatherInfo.value[indexInfo[i]]
+
+// })
+
+
+
+
+// watch(weatherInfo, () => {
+//   for (let i = 0; i < 6; i++)
+//     sortInfo.value[i] = weatherInfo.value[indexInfo[i]]
+
+// })
+
+
+
 watch(weatherInfo, () => {
-  for (let i = 0; i < 6; i++)
-  sortInfo.value[i] = weatherInfo.value[indexInfo[i]]
+  sortInfo.value.length = 0
+  sortInfo.value.push(weatherInfo.value[0])
+  weatherInfo.value[0].date = "Сегодня"
+  for (let i = 4; i < 40; i++) {
+    if (weatherInfo.value[i].dt_txt.slice(11).slice(0, 2).includes("09")) {
+      sortInfo.value.push(weatherInfo.value[i])
+    }
+  }
 
 })
 
 
+
 function scroll() {
   // window.scrollBy(0, 400)
-  window.scrollTo(0,530)
+  window.scrollTo(0, 530)
 }
 
 
