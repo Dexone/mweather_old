@@ -7,8 +7,8 @@
                 <path
                     d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
             </svg> -->
-            <svg class="w-[30px] h-[30px] text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24">
+            <svg class="w-[30px] h-[30px] text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 6v13m0-13 4 4m-4-4-4 4" />
             </svg>
@@ -25,8 +25,8 @@
 
         <button @click=latlong data-tooltip-target="tooltip-wallet" type="button"
             class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 ">
-            <svg class="w-6 h-6 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd"
                     d="M12 2a8 8 0 0 1 6.6 12.6l-.1.1-.6.7-5.1 6.2a1 1 0 0 1-1.6 0L6 15.3l-.3-.4-.2-.2v-.2A8 8 0 0 1 11.8 2Zm3 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                     clip-rule="evenodd" />
@@ -49,7 +49,7 @@
 
         <div class="flex items-center justify-center">
             <input @input="city = 'q=' + inputCity, syncCity = (favouriteCity.includes(inputCity))" v-model="inputCity"
-                type="email" id="inp" aria-describedby="helper-text-explanation" 
+                type="email" id="inp" aria-describedby="helper-text-explanation"
                 class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 placeholder="Город">
         </div>
@@ -105,8 +105,8 @@
             data-tooltip-target="tooltip-profile" type="button"
             class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50  group">
 
-            <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 24 24">
                 <path
                     d="m12.7 20.7 6.2-7.1c2.7-3 2.6-6.5.8-8.7A5 5 0 0 0 16 3c-1.3 0-2.7.4-4 1.4A6.3 6.3 0 0 0 8 3a5 5 0 0 0-3.7 1.9c-1.8 2.2-2 5.8.8 8.7l6.2 7a1 1 0 0 0 1.4 0Z" />
             </svg>
@@ -178,8 +178,14 @@ watchEffect(() => {
 
 
 function topFunction() {
-    document.body.scrollTop = 0; // Для Safari
-    document.documentElement.scrollTop = 0; // Для Chrome, Firefox, IE и Opera
+    // document.body.scrollTop = 0; // Для Safari
+    // document.documentElement.scrollTop = 0; // Для Chrome, Firefox, IE и Opera
+
+    window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+});
+    
 }
 
 </script>

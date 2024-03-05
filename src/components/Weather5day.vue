@@ -78,7 +78,11 @@ watch(weatherInfo, () => {
 
 function scroll() {
   // window.scrollBy(0, 400)
-  window.scrollTo(0, 530)
+  // window.scrollTo(0, 530)
+  window.scrollTo({
+    top: 530,
+    behavior: 'smooth'
+  })
 }
 
 
