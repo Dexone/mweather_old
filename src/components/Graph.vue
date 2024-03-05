@@ -1,6 +1,5 @@
 <template>
     <LineChart :chartData="lineData" />
-    <button @click="console.log(graphInfo)">test</button>
 </template>
 
 <script setup>

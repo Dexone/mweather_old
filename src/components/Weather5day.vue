@@ -57,24 +57,8 @@ let detailsIndex = inject("detailsIndex")
 const weatherInfo = inject("weatherInfo")
 const sortInfo = ref([])
 
-const indexInfo = [0, 8, 16, 24, 32, 39]
 
 
-
-// watch(weatherInfo, () => {
-//   for (let i = 0; i < 6; i++)
-//   sortInfo.value[i] = weatherInfo.value[indexInfo[i]]
-
-// })
-
-
-
-
-// watch(weatherInfo, () => {
-//   for (let i = 0; i < 6; i++)
-//     sortInfo.value[i] = weatherInfo.value[indexInfo[i]]
-
-// })
 
 
 
