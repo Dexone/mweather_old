@@ -1,22 +1,29 @@
 <template>
     <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl ">
-        Подробный прогноз на {{ selectedCity.date[selectedCity.nx] }}
+        Подробный прогноз на {{ weatherInfo[detailsIndex].date }}
     </h5>
-    <p class="text-sm font-normal text-gray-500 ">{{ selectedCity.week[selectedCity.nx] }}</p>
-    
-    <ul class="my-4 space-y-3">
 
+
+    <ul class="my-4 space-y-3" v-for="weather, index in weatherDetails">
+
+
+        <p class="text-sm font-normal text-gray-500 ">
+            <a v-if="weather.dt_txt.slice(11).slice(0, 2) === '12' || weather.dt_txt.slice(11).slice(0, 2) === '15'">Днем</a>
+            <a v-if="weather.dt_txt.slice(11).slice(0, 2) === '18' || weather.dt_txt.slice(11).slice(0, 2) === '21'">Вечером</a>
+            <a v-if="weather.dt_txt.slice(11).slice(0, 2) === '00' || weather.dt_txt.slice(11).slice(0, 2) === '03'">Ночью</a>
+            <a v-if="weather.dt_txt.slice(11).slice(0, 2) === '06' || weather.dt_txt.slice(11).slice(0, 2) === '09'">Утром</a>
+        </p>
 
         <li>
             <a href="#"
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
 
-                <img class="rounded-full w-6 h-6" v-bind:src="weatherInfo[selectedCity.nx].pic" alt="profile picture">
+                <img class="rounded-full w-6 h-6" v-bind:src="weatherInfo[detailsIndex].pic" alt="profile picture">
 
                 <span class="flex-1 ms-3 whitespace-nowrap">Облачно</span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Вероятность
-                    осадков {{ weatherInfo[selectedCity.nx].pop }}%</span>
+                    осадков {{ weather.pop }}%</span>
             </a>
         </li>
 
@@ -28,10 +35,10 @@
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
                 <img class="rounded-full w-6 h-6" src="../assets/temp.png" alt="profile picture">
 
-                <span class="flex-1 ms-3 whitespace-nowrap">{{ weatherInfo[selectedCity.nx].temp }}</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">{{ weather.temp }}</span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Ощущается
-                    как {{ weatherInfo[selectedCity.nx].feels_like }}</span>
+                    как {{ weather.feels_like }}</span>
             </a>
         </li>
 
@@ -42,14 +49,14 @@
         <li>
             <a href="#"
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
-                <img :style="{ transform: 'rotate(' + weatherInfo[selectedCity.nx].deg + 'deg)' }"
-                    class="rounded-full w-6 h-6" src="../assets/arrow.png" alt="profile picture">
+                <img :style="{ transform: 'rotate(' + weather.deg + 'deg)' }" class="rounded-full w-6 h-6"
+                    src="../assets/arrow.png" alt="profile picture">
                 <span class="flex-1 ms-3 whitespace-nowrap ">
-                    <a v-if="weatherInfo[selectedCity.nx].deg > 0">Южный</a> {{ weatherInfo[selectedCity.nx].wind }} м/с
+                    <a v-if="weather.deg > 0">Южный</a> {{ weather.wind }} м/с
                 </span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Порывы
-                    до {{ weatherInfo[selectedCity.nx].gust }} м/с</span>
+                    до {{ weather.gust }} м/с</span>
             </a>
         </li>
 
@@ -61,37 +68,47 @@
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
                 <img class="rounded-full w-6 h-6" src="../assets/humidity.png" alt="profile picture">
 
-                <span class="flex-1 ms-3 whitespace-nowrap">Влажность {{ weatherInfo[selectedCity.nx].humidity }}%</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Влажность {{ weather.humidity }}%</span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Давление
-                    {{ weatherInfo[selectedCity.nx].grnd }}мм рт.ст.</span>
+                    {{ weather.grnd }}мм рт.ст.</span>
             </a>
         </li>
 
 
 
     </ul>
-    <div>
+    <!-- <div>
         <a href="#" class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline ">
-            <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             тест</a>
-    </div>
+    </div> -->
 </template>
-  
+
 <script setup>
 
-import { inject } from 'vue'
+import { inject, watch, ref } from 'vue'
 
 
 
-
-
-const city = inject("city")
+let detailsIndex = inject("detailsIndex")
 const weatherInfo = inject("weatherInfo")
-const selectedCity = inject("selectedCity")
+
+const weatherDetails = ref([])
+
+watch(weatherInfo, () => {
+    let b = detailsIndex.value
+    for (let i = 0; i < 3; i++) {
+        weatherDetails.value[i] = weatherInfo.value[b]
+        b=b+2
+    }
+})
+
+
 
 
 defineProps({

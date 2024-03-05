@@ -1,5 +1,3 @@
-
-
 <template>
   <!-- max-w-screen-xl -->
   <main class="bg-white rounded-lg shadow max-w-4xl mx-auto">
@@ -11,7 +9,8 @@
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl  pb-5">
           <a href="https://dexone.github.io/mweather/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="../public/logo.png" class="h-8" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap underline underline-offset-3 decoration-4 decoration-blue-400">mweather</span>
+            <span
+              class="self-center text-2xl font-semibold whitespace-nowrap underline underline-offset-3 decoration-4 decoration-blue-400">mweather</span>
           </a>
 
 
@@ -52,9 +51,11 @@
 
               <p class="text-base leading-relaxed text-gray-500 ">
                 Это приложение разработано Dexone и включает в себя функции отображения прогноза погоды на 5 дней,
-                подробного прогноза на выбранный день и графика температуры на 24 часа. Есть возможность добавить город в
+                подробного прогноза на выбранный день и графика температуры на 24 часа. Есть возможность добавить город
+                в
                 избранное с
-                сохранением при перезагрузке страницы, уточнить местоположение по геолокации или ввести название города в
+                сохранением при перезагрузке страницы, уточнить местоположение по геолокации или ввести название города
+                в
                 поисковую строку.
               </p>
             </div>
@@ -138,7 +139,7 @@ const showModal = ref(true)
 
 
 
-const weatherInfo = ref([{ dt_txt: "loading", day: "loading", pic: "loading", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0", city: "0" }])
+const weatherInfo = ref([{ dt_txt: "loading", day: "loading", pic: "loading", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0", city: "0", number: "0", week: "0", date: "0" }])
 provide("weatherInfo", weatherInfo)
 
 let graphInfo = ref([])
@@ -151,25 +152,46 @@ provide("graphInfo", graphInfo)
 const inputCity = ref('')
 provide("inputCity", inputCity)
 
-let selectedCity = ref({ week: [], date: [], nx: 0 })
-provide("selectedCity", selectedCity)
 
 
 const favouriteCity = ref(["Киров", "Москва", "Пермь", "Екатеринбург", "Казань"])
 provide("favouriteCity", favouriteCity)
 
+
+
+let detailsIndex = ref(0)
+provide("detailsIndex", detailsIndex)
+
 watchEffect(() => {
   city
-  selectedCity.value.nx
+
+  detailsIndex.value
   getWeather()
 })
 
+
+
+
 function getWeather() {
+
+  let week = []
+  let date = []
+  let count = 1
+  let indexMonth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+  let indexNed = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота']
+  for (let i = 0; i < 40; i++) {
+    let d = new Date(new Date().getTime() + count * 60 * 60 * 1000);
+    let Month = d.getMonth();
+    let Ned = d.getDay();
+    let Day = d.getDate();
+    week.push(indexNed[Ned])
+    date.push(Day + " " + indexMonth[Month])
+    count = count + 3
+  }
+
+
   const cityValue = city.value
   axios.get(`https://api.openweathermap.org/data/2.5/forecast?${cityValue}&units=metric&appid=dd942f90e8c353bb0a469a7db5bbb3d4`).then((res) => {
-    graphInfo.value.x = [res.data.list[selectedCity.value.nx].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 1].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 2].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 3].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 4].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 5].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 6].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 7].dt_txt.slice(11, -6), res.data.list[selectedCity.value.nx + 8].dt_txt.slice(11, -6)]
-    graphInfo.value.y = [res.data.list[selectedCity.value.nx].main.temp, res.data.list[selectedCity.value.nx + 1].main.temp, res.data.list[selectedCity.value.nx + 2].main.temp, res.data.list[selectedCity.value.nx + 3].main.temp, res.data.list[selectedCity.value.nx + 4].main.temp, res.data.list[selectedCity.value.nx + 5].main.temp, res.data.list[selectedCity.value.nx + 6].main.temp, res.data.list[selectedCity.value.nx + 7].main.temp, res.data.list[selectedCity.value.nx + 8].main.temp]
-    console.log(res.data.list[selectedCity.value.nx].dt_txt.slice(11, -6))
     const weatherData = res.data.list.map((item, index) => {
       return {
         dt_txt: res.data.list[index].dt_txt,
@@ -184,10 +206,14 @@ function getWeather() {
         deg: res.data.list[index].wind.deg,
         feels_like: Math.round(res.data.list[index].main.feels_like),
         gust: Math.round(res.data.list[index].wind.gust),
-        city: res.data.city.name
+        city: res.data.city.name,
+        number: index,
+        week: week[index],
+        date: date[index]
       }
     })
-    weatherInfo.value = weatherData; weatherData.splice(1, 7); weatherData.splice(2, 7); weatherData.splice(3, 7); weatherData.splice(4, 7); weatherData.splice(5, 6);
+    weatherInfo.value = weatherData;
+
   })
 }
 

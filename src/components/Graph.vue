@@ -1,22 +1,37 @@
 <template>
     <LineChart :chartData="lineData" />
+    <button @click="console.log(graphInfo)">test</button>
 </template>
 
 <script setup>
 import axios from 'axios'
 import Chart from 'chart.js/auto';
 import { LineChart } from "vue-chart-3"
-import { computed, inject } from 'vue'
-const city = inject("city")
+import { computed, inject, watch, ref } from 'vue'
+
 defineProps({
     type: Object,
     required: true
 })
 
 
+const graphInfo = ref({ x: [], y: [] })
+const weatherInfo = inject("weatherInfo")
 
-const graphInfo = inject("graphInfo")
-const selectedCity = inject("selectedCity")
+let detailsIndex = inject("detailsIndex")
+
+
+watch(weatherInfo, () => {
+    let b = detailsIndex.value
+    for (let i = 0; i < 8; i++) {
+        graphInfo.value.x[i] = weatherInfo.value[b].dt_txt.slice(11, -6);
+        graphInfo.value.y[i] = weatherInfo.value[b].temp
+        b++
+    }
+
+})
+
+
 
 
 const lineData = computed(() => ({
@@ -25,7 +40,7 @@ const lineData = computed(() => ({
     datasets: [
         {
             data: graphInfo.value.y,
-            label: 'График температуры на ' + selectedCity.value.date[selectedCity.value.nx],
+            label: 'График температуры на ' + weatherInfo.value[detailsIndex.value].date,
             borderColor: 'rgb(55, 65, 81)', //цвет линии
             borderWidth: 1, // толщина линии
             backgroundColor: 'rgba(255, 255, 255, 0.0)', //точки
