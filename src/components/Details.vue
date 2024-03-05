@@ -102,7 +102,7 @@ const weatherDetails = ref([])
 
 watch(weatherInfo, () => {
     let b = detailsIndex.value
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
         weatherDetails.value[i] = weatherInfo.value[b]
         b=b+2
     }
