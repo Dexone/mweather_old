@@ -26,8 +26,7 @@
 
                 <span class="flex-1 ms-3 whitespace-nowrap">Облачно</span>
                 <span
-                    class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Вероятность
-                    осадков {{ weather.pop }}%</span>
+                    class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">☔{{ weather.pop }}%</span>
             </a>
         </li>
 
@@ -76,7 +75,7 @@
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
                 <img class="rounded-full w-6 h-6" src="../assets/humidity.png" alt="profile picture">
 
-                <span class="flex-1 ms-3 whitespace-nowrap">Влажность {{ weather.humidity }}%</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">{{ weather.humidity }}%</span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">
                     {{ weather.grnd }}мм рт.ст.</span>
