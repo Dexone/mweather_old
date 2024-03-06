@@ -16,7 +16,6 @@ defineProps({
 
 const graphInfo = ref({ x: [], y: [] })
 const weatherInfo = inject("weatherInfo")
-
 let detailsIndex = inject("detailsIndex")
 
 

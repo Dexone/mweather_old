@@ -1,21 +1,20 @@
 <template>
   <div class="flex items-center justify-between mb-4 ">
     <h5 class="text-xl font-bold leading-none text-gray-900">Прогноз на 5 дней</h5>
-    <a href="#" class="text-sm font-medium text-blue-600 hover:underline">
+    <a class="text-sm font-medium text-blue-600 hover:underline">
       {{ weatherInfo[0].city }}
     </a>
   </div>
   <div class="flow-root">
-    <ul role="list" class="divide-y divide-gray-200">
+    <ul class="divide-y divide-gray-200">
 
 
 
 
       <li v-for="weather, index in sortInfo" class="py-3 sm:py-4">
-        <div class="flex items-center ">
+        <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img class="w-8 h-8 rounded-full" v-bind:src="weather.pic" alt="Bonnie image">
-
+            <img class="w-8 h-8 rounded-full" v-bind:src="weather.pic">
           </div>
           <div class="flex-1 min-w-0 ms-4">
             <p class="text-sm font-medium text-gray-900 truncate">
@@ -38,28 +37,17 @@
 
 <script setup>
 
-import { inject, ref, computed, watch } from 'vue'
+import { inject, ref, watch } from 'vue'
 
 defineProps({
   type: Object,
   required: true
 })
 
-
-
-
-
 let detailsIndex = inject("detailsIndex")
-
-
-
 
 const weatherInfo = inject("weatherInfo")
 const sortInfo = ref([])
-
-
-
-
 
 
 watch(weatherInfo, () => {
@@ -77,17 +65,11 @@ watch(weatherInfo, () => {
 
 
 function scroll() {
-  // window.scrollBy(0, 400)
-  // window.scrollTo(0, 530)
   window.scrollTo({
     top: 530,
     behavior: 'smooth'
   })
 }
-
-
-
-
 
 
 </script>
