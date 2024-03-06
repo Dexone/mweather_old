@@ -66,7 +66,7 @@
 
 
 <script setup>
-import { inject, ref, watchEffect } from 'vue'
+import { inject, ref, watch } from 'vue'
 
 defineProps({
     type: Object,
@@ -88,9 +88,10 @@ function latlong() {
     });
 }
 
-watchEffect(() => {
-    inputCity
-    favouriteCity
+
+
+
+watch([ inputCity, favouriteCity], () => {
     syncCity.value = (favouriteCity.value.includes(inputCity.value))
 })
 

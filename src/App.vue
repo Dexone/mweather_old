@@ -101,7 +101,7 @@ import Footer from "./components/Footer.vue"
 import Graph from "./components/Graph.vue"
 import Details from "./components/Details.vue"
 import axios from 'axios'
-import { provide, ref, watchEffect } from 'vue'
+import { provide, ref, watch } from 'vue'
 
 
 const city = ref("q=Москва")
@@ -124,13 +124,10 @@ provide("favouriteCity", favouriteCity)
 let detailsIndex = ref(0)
 provide("detailsIndex", detailsIndex)
 
-watchEffect(() => {
-  city
-  detailsIndex.value
+
+watch([city, detailsIndex.value], () => {
   getWeather()
 })
-
-
 
 
 function getWeather() {
