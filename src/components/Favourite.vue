@@ -80,6 +80,7 @@ function update() {
         loading.value = favouriteCity.value.length
         setTimeout(() => {
             axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${favouriteCity.value[i]}&units=metric&appid=dd942f90e8c353bb0a469a7db5bbb3d4`).then((res) => {
+
                 favouriteWeather.value.pic.push(import.meta.env.BASE_URL + "/min/" + res.data.list[0].weather[0].main + ".png")
                 favouriteWeather.value.temp.push(Math.round(res.data.list[0].main.temp))
                 loading.value = loading.value - 1

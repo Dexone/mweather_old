@@ -1,5 +1,5 @@
 <template>
-123
+
   <!-- max-w-screen-xl -->
   <main class="bg-white rounded-lg shadow max-w-4xl mx-auto">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
@@ -35,8 +35,7 @@
               </h3>
               <button @click="showModal = !showModal" type="button"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center ">
-                <svg class="w-3 h-3" fill="none"
-                  viewBox="0 0 14 14">
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                 </svg>
@@ -68,7 +67,9 @@
         <Details />
       </div>
 
-
+      <div class="max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6   mb-3 mx-auto">
+        <Sun />
+      </div>
 
       <div class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow mb-3 mx-auto">
         <Graph />
@@ -97,6 +98,7 @@
 
 <script setup>
 import Weather5day from "./components/Weather5day.vue"
+import Sun from "./components/Sun.vue"
 import Favourite from "./components/Favourite.vue"
 import Footer from "./components/Footer.vue"
 import Graph from "./components/Graph.vue"
@@ -110,7 +112,7 @@ provide("city", city)
 
 const showModal = ref(true)
 
-const weatherInfo = ref([{ dt_txt: "loading", day: "loading", pic: "loading", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0", city: "0", number: "0", week: "0", date: "0" }])
+const weatherInfo = ref([{ dt_txt: "loading", day: "loading", pic: "loading", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0", city: "0", sunrise: "0", sunset: "0", number: "0", week: "0", date: "0" }])
 provide("weatherInfo", weatherInfo)
 
 let graphInfo = ref([])
@@ -165,6 +167,8 @@ function getWeather() {
         feels_like: Math.round(res.data.list[index].main.feels_like),
         gust: Math.round(res.data.list[index].wind.gust),
         city: res.data.city.name,
+        sunrise: res.data.city.sunrise,
+        sunset: res.data.city.sunset,
         number: index,
         week: week[index],
         date: date[index]
