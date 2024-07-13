@@ -1,7 +1,7 @@
 <template>
 
   <!-- max-w-screen-xl -->
-  <main class="bg-white rounded-lg shadow max-w-4xl mx-auto">
+  <main class="bg-white rounded-lg shadow max-w-3xl mx-auto">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
 
       <nav class="bg-white border-gray-200 ">
@@ -56,30 +56,29 @@
         </div>
       </div>
 
+      <div class="max-w-3xl bg-white divide-y divide-gray-100 rounded-lg shadow  mx-auto  mb-3">
+        <Favourite />
+      </div>
 
-
-
-      <div class=" max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8  mb-3 mx-auto">
+      <div class=" max-w-3xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8  mb-3 mx-auto">
         <Weather5day />
       </div>
 
-      <div class="max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6   mb-3 mx-auto">
+      <div class="max-w-3xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6   mb-3 mx-auto">
         <Details />
       </div>
 
-      <div class="max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6   mb-3 mx-auto">
+      <div class="max-w-3xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6   mb-3 mx-auto">
         <Sun />
       </div>
 
-      <div class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow mb-3 mx-auto">
+      <div class="max-w-3xl p-6 bg-white border border-gray-200 rounded-lg shadow mb-3 mx-auto">
         <Graph />
       </div>
 
 
 
-      <div class="max-w-4xl bg-white divide-y divide-gray-100 rounded-lg shadow  mx-auto ">
-        <Favourite />
-      </div>
+
 
 
       <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
@@ -88,11 +87,6 @@
     </div>
 
   </main>
-
-  <div
-    class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 ">
-    <Footer />
-  </div>
 </template>
 
 
@@ -100,7 +94,6 @@
 import Weather5day from "./components/Weather5day.vue"
 import Sun from "./components/Sun.vue"
 import Favourite from "./components/Favourite.vue"
-import Footer from "./components/Footer.vue"
 import Graph from "./components/Graph.vue"
 import Details from "./components/Details.vue"
 import axios from 'axios'
@@ -121,7 +114,8 @@ provide("graphInfo", graphInfo)
 const inputCity = ref('')
 provide("inputCity", inputCity)
 
-const favouriteCity = ref(["Москва", "Санкт-Петербург", "Сочи", "Ростов-на-Дону", "Волгоград", "Нижний Новгород", "Новосибирск"])
+// const favouriteCity = ref(["Москва", "Санкт-Петербург", "Сочи", "Ростов-на-Дону", "Волгоград", "Нижний Новгород", "Новосибирск"])
+const favouriteCity = ref(["Москва", "Санкт-Петербург", "Сочи"])
 provide("favouriteCity", favouriteCity)
 
 let detailsIndex = ref(0)
