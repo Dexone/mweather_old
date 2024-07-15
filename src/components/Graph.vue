@@ -3,13 +3,13 @@
 
 <div v-if="osnStore.loaderGetWeather === true" class="  rounded animate-pulse ">
     <div class="flex items-baseline mt-4">
-        <div class="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
-        <div class="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-        <div class="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-        <div class="w-full h-64 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-        <div class="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-        <div class="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-        <div class="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
+        <div class="w-full bg-gray-200 rounded-t-lg h-72 "></div>
+        <div class="w-full h-56 ms-6 bg-gray-200 rounded-t-lg "></div>
+        <div class="w-full bg-gray-200 rounded-t-lg h-72 ms-6 "></div>
+        <div class="w-full h-64 ms-6 bg-gray-200 rounded-t-lg "></div>
+        <div class="w-full bg-gray-200 rounded-t-lg h-80 ms-6"></div>
+        <div class="w-full bg-gray-200 rounded-t-lg h-72 ms-6"></div>
+        <div class="w-full bg-gray-200 rounded-t-lg h-80 ms-6"></div>
     </div>
 </div>
 

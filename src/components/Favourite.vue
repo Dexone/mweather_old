@@ -15,7 +15,7 @@
 
                 </button>
                 <input v-model="inputCity"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 "
                     placeholder="Город">
 
                 <button v-if="syncCity" @click="favouriteCity.splice(favouriteCity.indexOf(inputCity), 1)" type="button"
@@ -36,7 +36,7 @@
 
             </div>
             <button @click="inpCity()" type="submit"
-                class="inline-flex items-center py-2.5 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                class="inline-flex items-center py-2.5 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
                 <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -55,46 +55,46 @@
 <div role="status" class=" space-y-4 divide-y divide-gray-200 rounded animate-pulse p-8" v-if="loaderUpdateFavourite === true">
     <div class="flex items-center justify-between">
         <div>
-            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="h-2.5 bg-gray-300 rounded-full w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full "></div>
         </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        <div class="h-2.5 bg-gray-300 rounded-full  w-12"></div>
     </div>
     <div class="flex items-center justify-between pt-4">
         <div>
-            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="h-2.5 bg-gray-300 rounded-full  w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full"></div>
         </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        <div class="h-2.5 bg-gray-300 rounded-full w-12"></div>
     </div>
     <div class="flex items-center justify-between pt-4">
         <div>
-            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="h-2.5 bg-gray-300 rounded-full w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full "></div>
         </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        <div class="h-2.5 bg-gray-300 rounded-full w-12"></div>
     </div>
     <div class="flex items-center justify-between pt-4">
         <div>
-            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="h-2.5 bg-gray-300 rounded-full w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full"></div>
         </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        <div class="h-2.5 bg-gray-300 rounded-full w-12"></div>
     </div>
     <div class="flex items-center justify-between pt-4">
         <div>
-            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="h-2.5 bg-gray-300 rounded-full  w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full "></div>
         </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        <div class="h-2.5 bg-gray-300 rounded-full  w-12"></div>
     </div>
 
     <div class="flex items-center justify-between pt-4">
         <div>
-            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="h-2.5 bg-gray-300 rounded-full  w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full"></div>
         </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        <div class="h-2.5 bg-gray-300 rounded-full w-12"></div>
     </div>
 </div>
 <!-- loader -->
