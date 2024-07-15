@@ -1,7 +1,15 @@
 <template>
-    <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl">
-        Подробный прогноз на {{ weatherInfo[detailsIndex].date }}
-    </h5>
+    <!-- <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl">
+        Подробный прогноз на {{ osnStore.weatherInfo[detailsIndex].date }}
+    </h5> -->
+
+    <div class="flex items-center justify-between mb-4 ">    
+    <h5 class="text-xl font-bold leading-none text-gray-900"> Подробный прогноз</h5>
+    <a class="text-xl font-bold leading-none text-gray-900">
+        {{ osnStore.weatherInfo[detailsIndex].date }}
+    </a>
+  </div>
+
 
 
     <ul class="my-4 space-y-3" v-for="weather, index in weatherDetails">
@@ -18,10 +26,48 @@
                 v-if="weather.dt_txt.slice(11).slice(0, 2) === '06' || weather.dt_txt.slice(11).slice(0, 2) === '09'">Утром</a>
         </p>
 
-        <li>
+
+
+<!-- loader -->
+<div role="status" class=" space-y-4 divide-y divide-gray-200 rounded animate-pulse" v-if="osnStore.loaderGetWeather === true">
+    <div class="flex items-center justify-between">
+        <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        </div>
+        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+    </div>
+    <div class="flex items-center justify-between pt-4">
+        <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        </div>
+        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+    </div>
+    <div class="flex items-center justify-between pt-4">
+        <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        </div>
+        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+    </div>
+    <div class="flex items-center justify-between pt-4">
+        <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        </div>
+        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+    </div>
+
+</div>
+<!-- loader -->
+
+
+
+        <li v-if="osnStore.loaderGetWeather === false">
             <a
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow">
-                <img class="rounded-full w-6 h-6" v-bind:src="weatherInfo[detailsIndex].pic">
+                <img class="rounded-full w-6 h-6" v-bind:src="osnStore.weatherInfo[detailsIndex].pic">
                 <span class="flex-1 ms-3 whitespace-nowrap">Облачно</span>
                 <span
                     class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded">☔{{
@@ -32,7 +78,7 @@
 
 
 
-        <li>
+        <li v-if="osnStore.loaderGetWeather === false">
             <a
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
                 <img class="rounded-full w-6 h-6" :style="{ transform: 'rotate(' + weather.deg + 'deg)' }"
@@ -52,7 +98,7 @@
             </a>
         </li>
 
-        <li>
+        <li v-if="osnStore.loaderGetWeather === false">
             <a
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow">
                 <img class="rounded-full w-6 h-6" src="../assets/temp.png">
@@ -65,7 +111,7 @@
             </a>
         </li>
 
-        <li>
+        <li v-if="osnStore.loaderGetWeather === false">
             <a
                 class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow ">
                 <img class="rounded-full w-6 h-6" src="../assets/humidity.png">
@@ -83,23 +129,26 @@
 <script setup>
 
 import { inject, watch, ref } from 'vue'
-
-let detailsIndex = inject("detailsIndex")
-const weatherInfo = inject("weatherInfo")
-
-const weatherDetails = ref([])
-
-watch(weatherInfo, () => {
-    let b = detailsIndex.value
-    for (let i = 0; i < 4; i++) {
-        weatherDetails.value[i] = weatherInfo.value[b]
-        b = b + 2
-    }
-})
-
+import { useOsn } from '../../store/osn.js';
+const osnStore = useOsn();
 defineProps({
     type: Object,
     required: true
 })
+
+let detailsIndex = inject("detailsIndex")
+
+const weatherDetails = ref([])
+
+watch(osnStore, () => {
+    let b = detailsIndex.value //индекс выбранного дня
+    for (let i = 0; i < 4; i++) { //получение 4 значений погоды (утро день...)
+        weatherDetails.value[i] = osnStore.weatherInfo[b]
+        b = b + 2 //пропуск 2 значений ибо 9:00 12:00
+    }
+    console.log(osnStore.weatherInfo)
+})
+
+
 
 </script>

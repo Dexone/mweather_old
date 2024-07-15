@@ -1,6 +1,30 @@
 <template>
 
-    <div class="flex justify-between mb-1">
+<div v-if="osnStore.loaderGetWeather === true" class="space-y-2.5 animate-pulse">
+    <div class="flex items-center w-full">
+        <div class="h-2.5 bg-gray-200 rounded-full w-32"></div>
+        <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
+        <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
+    </div>
+    <div class="flex items-center w-full">
+        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
+                <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
+        <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
+    </div>
+    <div class="flex items-center w-full">
+        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
+        <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-80"></div>
+        <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
+    </div>
+    <div class="flex items-center w-full">
+        <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
+                <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
+        <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
+    </div>
+
+</div>
+
+    <div class="flex justify-between mb-1" v-if="osnStore.loaderGetWeather === false">
         <!-- <span class="text-base font-medium text-blue-700 ">Flowbite</span> -->
         <img width="25px" src="../assets/sun-up.png">
         <span class="text-sm text-gray-500 ">Световой день</span>
@@ -23,19 +47,20 @@
 
 <script setup>
 import { inject, watch, ref } from 'vue'
+import { useOsn } from '../../store/osn.js';
+const osnStore = useOsn();
 let sun = ref([])
-const weatherInfo = inject("weatherInfo")
 
-watch(weatherInfo, () => {
-    let raznHour = Math.floor((weatherInfo.value[0].sunset - weatherInfo.value[0].sunrise) / 60 / 60)
-    let raznMin = Math.round(((weatherInfo.value[0].sunset - weatherInfo.value[0].sunrise) - (raznHour * 60 * 60)) / 60)
+watch(osnStore, () => {
+    let raznHour = Math.floor((osnStore.weatherInfo[0].sunset - osnStore.weatherInfo[0].sunrise) / 60 / 60)
+    let raznMin = Math.round(((osnStore.weatherInfo[0].sunset - osnStore.weatherInfo[0].sunrise) - (raznHour * 60 * 60)) / 60)
 
 
     let date = Math.round(new Date().getTime()/1000) //time now in seconds
-    let razn1 = (weatherInfo.value[0].sunset - weatherInfo.value[0].sunrise)/100 // разница между датами / 100
-    let razn2 = Math.round((date - weatherInfo.value[0].sunrise)/razn1)
+    let razn1 = (osnStore.weatherInfo[0].sunset - osnStore.weatherInfo[0].sunrise)/100 // разница между датами / 100
+    let razn2 = Math.round((date - osnStore.weatherInfo[0].sunrise)/razn1)
 
-    sun.value = [(String(new Date(weatherInfo.value[0].sunrise * 1000))).slice(16, 21), raznHour + "ч " + raznMin + "мин", String(new Date(weatherInfo.value[0].sunset * 1000)).slice(16, 21), razn2]
+    sun.value = [(String(new Date(osnStore.weatherInfo[0].sunrise * 1000))).slice(16, 21), raznHour + "ч " + raznMin + "мин", String(new Date(osnStore.weatherInfo[0].sunset * 1000)).slice(16, 21), razn2]
 })
 
 
