@@ -132,7 +132,7 @@ defineProps({
     required: true
 })
 
-const favouriteCity = ref(["Москва", "Санкт-Петербург", "Сочи"])
+const favouriteCity = ref(["Москва", "Казань", "Сочи"])
 const state = useStorage('vue-use-local-storage', favouriteCity)
 
 const favouriteWeather = ref({ pic: [], temp: [] })
