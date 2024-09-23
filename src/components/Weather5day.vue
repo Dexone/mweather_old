@@ -106,6 +106,7 @@
 
 import { inject, ref, watch } from 'vue'
 import { useOsn } from '../../store/osn.js';
+import { onStartTyping } from '@vueuse/core';
 const osnStore = useOsn();
 defineProps({
   type: Object,
@@ -121,13 +122,15 @@ watch(osnStore, () => {
   sortInfo.value.length = 0 //обнуление массива 5 дневного прогноза
   sortInfo.value.push(osnStore.weatherInfo[0]) //пуш первого дня (сегодняшнего)
   osnStore.weatherInfo[0].date = "Сегодня" //присвоение первому объекту значения сегодня
+  if(osnStore.weatherInfo[0].dt_txt !== "loading"){
   for (let i = 4; i < 40; i++) {
     if (osnStore.weatherInfo[i].dt_txt.slice(11).slice(0, 2).includes("09")) { //отбор одного значения в день в 9 утра
       sortInfo.value.push(osnStore.weatherInfo[i]) //пуш погоды на этот день в массив 5-дневного прогноза
-  }
+  }}
   }
 
 })
+
 
 
 

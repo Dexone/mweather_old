@@ -4,7 +4,7 @@ import { ref, watch } from 'vue'
 
 export const useOsn = defineStore('osnStore', {
     state: () => ({
-        weatherInfo: ([{ dt_txt: "loading", day: "loading", pic: "loading", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0", city: "0", sunrise: "0", sunset: "0", number: "0", week: "0", date: "0"}]), city: 'q=Екатеринбург', loaderGetWeather: true
+        weatherInfo: ([{ dt_txt: "loading", day: "loading", pic: import.meta.env.BASE_URL + "/min/Clear.png", temp: "loading", wind: "loading", grnd: "loading", visibility: "loading", humidity: "loading", pop: "loading", deg: "0", feels_like: "0", gust: "0", city: "0", sunrise: "0", sunset: "0", number: "0", week: "0", date: "0"}]), city: 'q=Екатеринбург', loaderGetWeather: true
     }),
 
 
@@ -60,7 +60,6 @@ export const useOsn = defineStore('osnStore', {
                 })
 
                 //   weatherInfo.value = weatherData;
-                console.log(this.weatherInfo[0].city)
             })
 
 

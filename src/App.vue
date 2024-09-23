@@ -31,18 +31,8 @@
 <!-- loader -->
           
         </div>
-
-
-
-
-
         
       </nav>
-
-
-
-
-
 
 
 
@@ -94,6 +84,8 @@ import axios from 'axios'
 import { provide, ref, watch } from 'vue'
 import { useOsn } from '../store/osn.js';
 const osnStore = useOsn();
+
+osnStore.getWeather() //первый запрос погоды с городом по умолчанию при загрузке страницы
 
 // const city = ref("q=Москва")
 // provide("city", city)

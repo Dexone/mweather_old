@@ -35,11 +35,12 @@ const detailsIndex = inject("detailsIndex")
 
 watch([detailsIndex, osnStore], () => {
     let b = detailsIndex.value
+    if(osnStore.weatherInfo[0].dt_txt !== "loading"){
     for (let i = 0; i < 7; i++) {
         graphInfo.value.x[i] = osnStore.weatherInfo[b].dt_txt.slice(11, -6);
         graphInfo.value.y[i] = osnStore.weatherInfo[b].temp
         b++
-    }
+    }}
 
 })
 

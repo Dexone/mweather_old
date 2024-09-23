@@ -5,7 +5,7 @@
         <div class="flex items-center px-3 mb-3 mt-3">
 
             <div class="relative w-full">
-                <button @click="latlong" class="absolute inset-y-0 start-0 flex items-center ps-3 ">
+                <!-- <button @click="latlong" class="absolute inset-y-0 start-0 flex items-center ps-3 ">
 
                     <svg class="w-4 h-4 text-blue-600 rotate-45" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 20 24">
@@ -13,7 +13,7 @@
                             d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9" />
                     </svg>
 
-                </button>
+                </button> -->
                 <input v-model="inputCity"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 "
                     placeholder="Город">
@@ -100,6 +100,23 @@
 <!-- loader -->
 
 
+<!-- geocity -->
+<div  v-if="loaderUpdateFavourite === false"
+                    class="flex items-center justify-between w-full p-5 rounded-t-xl font-medium rtl:text-right text-gray-500 border border-b-0 border-l-0 border-r-0 border-gray-200 focus:ring-4 focus:ring-gray-200  hover:bg-gray-100 gap-3">
+                    <span> <img class="w-6 h-6 inline-block" v-bind:src="coordCity.pic"> <a
+                            @click="city = 'q=' + favourite, inputCity = favourite"> {{ coordCity.temp }}°
+                            {{ coordCity.name }}</a></span>
+
+                    <span>
+                        <button @click="city = 'q=' + favourite, inputCity = favourite, inpCity()" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-3 py-1 text-center me-2">Выбрать</button>
+                        <!-- <button @click="favouriteCity.splice(index, 1)">&nbsp;✕</button> -->
+                    </span>
+                </div>
+<!-- geocity -->
+
+
+
+
                 <div v-for="favourite, index in favouriteCity" v-if="loaderUpdateFavourite === false"
                     class="flex items-center justify-between w-full p-5 rounded-t-xl font-medium rtl:text-right text-gray-500 border border-b-0 border-l-0 border-r-0 border-gray-200 focus:ring-4 focus:ring-gray-200  hover:bg-gray-100 gap-3">
                     <span> <img class="w-6 h-6 inline-block" v-bind:src="favouriteWeather.pic[index]"> <a
@@ -167,20 +184,34 @@ function inpCity() { //отправка введенного в инпут го�
     osnStore.getWeather()
 }
 
+
+
+const coordCity = ref({})
 function latlong() { //запрос геолокации и передача координат в поисковый запрос, выполнение запроса
     navigator.geolocation.getCurrentPosition(function (position) {
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
-        osnStore.city = "lat=" + lat + "&lon=" + lon
-        osnStore.getWeather()
-        watch(osnStore, () => { //присвоение инпуту полученного названия города после запроса
-            inputCity.value = osnStore.weatherInfo[0].city
-        }, { once: true })
+
+        let cord =  "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude
+
+        axios.get(`https://api.openweathermap.org/data/2.5/forecast?${cord}&units=metric&appid=dd942f90e8c353bb0a469a7db5bbb3d4`).then((res) => {
+                coordCity.value.pic = import.meta.env.BASE_URL + "/min/" + res.data.list[0].weather[0].main + ".png"
+                coordCity.value.temp = Math.round(res.data.list[0].main.temp)
+                coordCity.value.name = res.data.city.name
+                console.log(res.data)
+            })
+
+
+
+
+
+        // osnStore.getWeather()
+        // watch(osnStore, () => { //присвоение инпуту полученного названия города после запроса
+        //     inputCity.value = osnStore.weatherInfo[0].city
+        // }, { once: true })
 
     });
 }
 
-
+latlong()
 
 const syncCity = ref() //true если город в инпуте есть в избранном для кнопки лайка
 watch([inputCity, favouriteCity.value], () => { //если меняется инпут или список избранного
@@ -192,7 +223,7 @@ watch([inputCity, favouriteCity.value], () => { //если меняется ин
 
 
 
-osnStore.getWeather() //первый запрос погоды с городом по умолчанию при загрузке страницы
+
 watch(osnStore, () => { //присвоение инпуту полученного названия города после запроса
             inputCity.value = osnStore.weatherInfo[0].city
         }, { once: true })
